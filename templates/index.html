@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.name }} | Software Engineer & Full Stack Developer</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Premium Style -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="cyber-dashboard-theme">
+
+    <!-- Starfield Background Canvas Container -->
+    <div class="cyber-scanline"></div>
+    <div class="glow-sphere-1"></div>
+    <div class="glow-sphere-2"></div>
+
+    <!-- Frosted Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo-glow">
+                <div class="logo-circle">
+                    <i class="fas fa-terminal"></i>
+                </div>
+                <span>
+                    <span class="bracket">&lt;</span>{{ profile.name.split()[1] }} <span class="accent-text">/DEV</span><span class="bracket">&gt;</span>
+                </span>
+            </a>
+            <nav class="nav-links">
+                <a href="#home" class="active"><i class="fas fa-home-alt"></i> Home</a>
+                <a href="#about"><i class="fas fa-user"></i> About</a>
+                <a href="#projects"><i class="fas fa-folder-open"></i> Projects</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+            </nav>
+            <div class="menu-btn"><i class="fas fa-bars-staggered"></i></div>
+        </div>
+    </header>
+
+    <!-- Main Wrapper -->
+    <main class="main-wrapper">
+        
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-container">
+                <!-- Cover Banner Frame -->
+                <div class="cover-frame glow-border-cyan">
+                    <img src="{{ url_for('static', filename='images/cover.png') }}?v=1.3" alt="Ganesh Patil Minimalist Desktop Banner" class="cover-img">
+                    <div class="cover-overlay">
+                        <div class="cover-overlay-name">{{ profile.name }}</div>
+                        <div class="cover-overlay-email">{{ profile.email }}</div>
+                    </div>
+                </div>
+
+                <!-- Profile Floating Card -->
+                <div class="profile-dashboard-card glass-morphic">
+                    <div class="profile-top-bar">
+                        <span class="status-beacon"><span class="beacon-pulse"></span> ACTIVE / AVAILABLE FOR HIRE</span>
+                        <span class="node-id">Vadodara, India</span>
+                    </div>
+
+                    <div class="profile-main-content">
+                        <!-- Neon Hexagon Avatar Icon -->
+                        <div class="avatar-hexagon">
+                            <i class="fas fa-code"></i>
+                        </div>
+
+                        <div class="profile-text-info">
+                            <div class="profile-title-row">
+                                <h1 class="profile-h1">{{ profile.name }}</h1>
+                                <span class="profile-version">v1.0</span>
+                            </div>
+                            
+                            <div class="role-badges">
+                                {% for role in profile.roles %}
+                                <span class="badge badge-glow">{{ role }}</span>
+                                {% endfor %}
+                            </div>
+
+                            <p class="profile-summary">{{ profile.bio }}</p>
+
+                            <div class="cta-actions">
+                                <a href="#contact" class="btn btn-neon-cyan"><i class="fas fa-envelope"></i> GET IN TOUCH</a>
+                                <a href="#projects" class="btn btn-outline-emerald"><i class="fas fa-diagram-project"></i> VIEW PORTFOLIO</a>
+                                <a href="{{ url_for('static', filename='resume.pdf') }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-cyan"><i class="fas fa-file-pdf"></i> VIEW RESUME</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bento Grid Info Section -->
+        <section id="about" class="bento-section scroll-reveal">
+            <div class="section-container">
+        <h2 class="bento-section-title">About <span class="accent-text">Me</span></h2>
+                
+                <div class="bento-grid">
+                    <!-- Bento Box 1: Professional Bio -->
+                    <div class="bento-box bento-bio glass-card glow-on-hover">
+                        <div class="card-tag">BIOGRAPHY</div>
+                        <h3 class="bento-h3">Who I Am</h3>
+                        <p class="bento-p">I am a professional Full Stack Developer and Cybersecurity Analyst. I design and implement highly secure, performant, and scalable web architectures. With expertise spanning front-end rendering down to database optimization and system hardening, I build digital experiences that are structurally sound and visually clean.</p>
+                        
+                        <div class="bento-bio-stats">
+                            <div class="bio-stat-item">
+                                <span class="stat-num text-cyan">99.9%</span>
+                                <span class="stat-label">Uptime Architecture</span>
+                            </div>
+                            <div class="bio-stat-item">
+                                <span class="stat-num text-emerald">Clean</span>
+                                <span class="stat-label">Code Standards</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bento Box 2: Dynamic Local Timezone -->
+                    <div class="bento-box bento-clock glass-card clock-card flex-center">
+                        <div class="card-tag">TIMEZONE</div>
+                        <div class="digital-clock" id="digital-clock">00:00:00</div>
+                        <div class="clock-details">
+                            <span class="active-badge"><span class="beacon-pulse"></span> ASIA/KOLKATA (IST)</span>
+                            <span id="date-string" class="date-str">MAY 30, 2026</span>
+                        </div>
+                    </div>
+
+                    <!-- Bento Box 3: Academic timeline -->
+                    <div class="bento-box bento-education glass-card education-card">
+                        <div class="card-tag">EDUCATION</div>
+                        <h3 class="bento-h3">Academic Status</h3>
+                        
+                        <div class="timeline-wrapper">
+                            <div class="timeline-node">
+                                <div class="node-marker glow-marker-cyan"></div>
+                                <div class="node-content">
+                                    <h4 class="node-title">{{ profile.education.degree }}</h4>
+                                    <p class="node-sub">{{ profile.education.institution }}</p>
+                                    <span class="node-date">{{ profile.education.years }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bento Box 4: Skills Matrix -->
+                    <div class="bento-box bento-skills glass-card skills-dashboard">
+                        <div class="card-tag">CAPABILITIES</div>
+                        <h3 class="bento-h3">Technical Expertise</h3>
+                        
+                        <div class="bento-skills-grid">
+                            <!-- Skill Column 1: Engineering -->
+                            <div class="skill-column">
+                                <h4 class="column-title"><i class="fas fa-terminal"></i> Languages & Logic</h4>
+                                <div class="skill-bars">
+                                    {% for skill in profile.skills.languages %}
+                                    <div class="skill-bar-row">
+                                        <div class="bar-info">
+                                            <span class="bar-name">{{ skill.name }}</span>
+                                            <span class="bar-percent">{{ skill.level }}%</span>
+                                        </div>
+                                        <div class="bar-track">
+                                            <div class="bar-fill fill-cyan" style="width: {{ skill.level }}%"></div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <!-- Skill Column 2: Web Tech -->
+                            <div class="skill-column">
+                                <h4 class="column-title"><i class="fas fa-layer-group"></i> Full Stack Frameworks</h4>
+                                <div class="skill-bars">
+                                    {% for skill in profile.skills.frameworks %}
+                                    <div class="skill-bar-row">
+                                        <div class="bar-info">
+                                            <span class="bar-name">{{ skill.name }}</span>
+                                            <span class="bar-percent">{{ skill.level }}%</span>
+                                        </div>
+                                        <div class="bar-track">
+                                            <div class="bar-fill fill-purple" style="width: {{ skill.level }}%"></div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <!-- Skill Column 3: Security -->
+                            <div class="skill-column">
+                                <h4 class="column-title"><i class="fas fa-shield-halved"></i> Cybersecurity Tools</h4>
+                                <div class="skill-bars">
+                                    {% for skill in profile.skills.cybersecurity %}
+                                    <div class="skill-bar-row">
+                                        <div class="bar-info">
+                                            <span class="bar-name">{{ skill.name }}</span>
+                                            <span class="bar-percent">{{ skill.level }}%</span>
+                                        </div>
+                                        <div class="bar-track">
+                                            <div class="bar-fill fill-emerald" style="width: {{ skill.level }}%"></div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Grid Section -->
+        <section id="projects" class="projects-section scroll-reveal">
+            <div class="section-container">
+                <h2 class="bento-section-title">Featured <span class="accent-text">Projects</span></h2>
+                
+                <div class="projects-grid">
+                    {% for project in profile.projects %}
+                    <div class="project-glass-card glass-card">
+                        <div class="project-glow-border"></div>
+                        <div class="project-header">
+                            <span class="project-version-badge"><i class="fas fa-circle-check"></i> COMPLETED {{ project.year }}</span>
+                            <span class="project-node-tech">{{ project.tech.split(',')[0] }}</span>
+                        </div>
+                        
+                        <h3 class="project-title">{{ project.title }}</h3>
+                        <p class="project-info-text">{{ project.description }}</p>
+
+                        <div class="project-features-list">
+                            {% for bullet in project.bullets %}
+                            <div class="feature-item">
+                                <i class="fas fa-circle-check text-rose"></i>
+                                <span>{{ bullet }}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="project-footer">
+                            <span class="project-meta-tech">{{ project.tech }}</span>
+                            <a href="{{ project.github }}" target="_blank" class="project-btn-glow btn"><i class="fab fa-github"></i> ACCESS REPO</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section scroll-reveal">
+            <div class="section-container">
+                <h2 class="bento-section-title">Get In <span class="accent-text">Touch</span></h2>
+                
+                <div class="control-grid">
+                    <!-- Clean Contact Info Card (Replaced faked diagnostics gauges) -->
+                    <div class="control-panel-stats glass-card flex-between flex-col">
+                        <div class="panel-header w-full">
+                            <div class="card-tag">CONTACT_DETAILS</div>
+                            <h3 class="panel-h3">Connect with Me</h3>
+                            <p class="panel-p">I am always open to exploring full-time opportunities, custom project inquiries, security reviews, or technical collaborations. Reach out via the form, or direct email.</p>
+                        </div>
+
+                        <!-- Professional Contact Cards -->
+                        <div class="panel-gauges w-full">
+                            <div class="gauge-item">
+                                <span class="gauge-title"><i class="fas fa-envelope text-cyan"></i> Email Address</span>
+                                <span class="gauge-value text-cyan">{{ profile.email }}</span>
+                            </div>
+                            <div class="gauge-item">
+                                <span class="gauge-title"><i class="fas fa-phone text-emerald"></i> Direct Phone</span>
+                                <span class="gauge-value text-emerald">{{ profile.phone }}</span>
+                            </div>
+                            <div class="gauge-item">
+                                <span class="gauge-title"><i class="fas fa-location-dot text-purple"></i> Current Location</span>
+                                <span class="gauge-value text-purple">Vadodara, India</span>
+                            </div>
+                            <div class="gauge-item">
+                                <span class="gauge-title"><i class="fas fa-circle-check text-rose"></i> Response Time</span>
+                                <span class="gauge-value text-rose">Within 24 Hours</span>
+                            </div>
+                        </div>
+
+                        <div class="panel-footer w-full">
+                            <div class="panel-social-links flex-center">
+                                <a href="{{ profile.socials.github }}" target="_blank" class="panel-social-btn"><i class="fab fa-github"></i></a>
+                                <a href="{{ profile.socials.linkedin }}" target="_blank" class="panel-social-btn"><i class="fab fa-linkedin"></i></a>
+                                <a href="{{ profile.socials.twitter }}" target="_blank" class="panel-social-btn"><i class="fab fa-x-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Clean Form wrapper -->
+                    <div class="contact-form-wrapper glass-card">
+                        <div class="card-tag">ENCRYPTED_SEND</div>
+                        <h3 class="bento-h3 mb-6">Initialize Connection</h3>
+                        
+                        <form id="contact-form" class="cyber-form">
+                            <div class="cyber-form-group">
+                                <label for="form-name"><i class="fas fa-user"></i> Name</label>
+                                <input type="text" id="form-name" required placeholder="Enter your name">
+                            </div>
+                            
+                            <div class="cyber-form-group">
+                                <label for="form-email"><i class="fas fa-envelope"></i> Email Address</label>
+                                <input type="email" id="form-email" required placeholder="name@domain.com">
+                            </div>
+                            
+                            <div class="cyber-form-group">
+                                <label for="form-message"><i class="fas fa-message"></i> Message Body</label>
+                                <textarea id="form-message" required rows="5" placeholder="Write your message here..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-submit-neon">
+                                <span>SEND MESSAGE</span> <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="copyright-glow">&copy; <span id="current-year"></span> {{ profile.name }}. All rights reserved.</p>
+            <div class="footer-icons">
+                <a href="{{ profile.socials.github }}" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="{{ profile.socials.linkedin }}" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="{{ profile.socials.twitter }}" target="_blank"><i class="fab fa-x-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript Code -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
